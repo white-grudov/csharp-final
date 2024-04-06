@@ -10,11 +10,11 @@ namespace csharp_final.Models
         private string _lastName;
         private string _email;
         private DateTime _birthDate;
-        private readonly int _age;
-        private readonly string _westernZodiac;
-        private readonly string _chineseZodiac;
-        private readonly bool _isAdult;
-        private readonly bool _isBirthday;
+        private int _age;
+        private string _westernZodiac;
+        private string _chineseZodiac;
+        private bool _isAdult;
+        private bool _isBirthday;
 
         public string FirstName
         {
@@ -37,7 +37,12 @@ namespace csharp_final.Models
         public DateTime BirthDate
         {
             get => _birthDate;
-            set { Validators.ValidateDateOfBirth(value); _birthDate = value; }
+            set 
+            { 
+                Validators.ValidateDateOfBirth(value); 
+                _birthDate = value;
+                CalculateDateProperties();
+            }
         }
 
         public int Age => _age;
@@ -53,6 +58,11 @@ namespace csharp_final.Models
             Email = email;
             BirthDate = birthDate;
 
+            CalculateDateProperties();
+        }
+
+        private void CalculateDateProperties()
+        {
             _age = DateUtilites.CalculateAge(_birthDate);
             _isAdult = DateTime.Now.Year - _birthDate.Year > 18;
             _westernZodiac = DateUtilites.GetWesternZodiac(_birthDate);

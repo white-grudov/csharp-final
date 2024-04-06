@@ -1,7 +1,7 @@
 ﻿<Window x:Class="csharp_final.Views.EditPersonView"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        Title="Edit Person" Height="220" Width="300">
+        Title="Edit Person" Height="250" Width="300">
     <Grid Margin="10">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
