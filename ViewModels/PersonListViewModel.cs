@@ -194,7 +194,7 @@ namespace csharp_final.ViewModels
         {
             await Task.Run(() =>
             {
-                FilteredPeople = new ObservableCollection<Person>(People.Where(p => p.ToString().Contains(FilterText)));
+                FilteredPeople = new ObservableCollection<Person>(People.Where(p => p.ToString().ToLower().Contains(FilterText.ToLower())));
                 
                 if (_currentColumn != null)
                 {
