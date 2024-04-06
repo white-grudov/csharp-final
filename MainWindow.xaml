@@ -9,11 +9,8 @@
         mc:Ignorable="d"
         Closing="Window_Closing"
         Title="People Database" Height="720" Width="1080">
-    <Window.DataContext>
-        <ViewModels:PersonListViewModel/>
-    </Window.DataContext>
 
     <Grid>
-        <Views:PersonListView></Views:PersonListView>
+        <Views:PersonListView x:Name="listView"/>
     </Grid>
 </Window>

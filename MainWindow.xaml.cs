@@ -1,5 +1,7 @@
 ﻿using csharp_final.Models;
+using csharp_final.ViewModels;
 using System.Windows;
+using System.Windows.Controls;
 
 namespace csharp_final
 {
@@ -18,7 +20,7 @@ namespace csharp_final
             var result = MessageBox.Show("Do you want to save current list?", "Save Data", MessageBoxButton.YesNo, MessageBoxImage.Question);
             if (result == MessageBoxResult.Yes)
             {
-                var viewModel = DataContext as ViewModels.PersonListViewModel;
+                var viewModel = listView.DataContext as PersonListViewModel;
                 await PersonSerializer.SavePersonListAsync(viewModel!.People);
             }
         }
