@@ -167,6 +167,7 @@ namespace csharp_final.ViewModels
             if (SpawnMessageBox(title, text))
             {
                 People = [];
+                Task.Run(Reset);
             }
         }
 
