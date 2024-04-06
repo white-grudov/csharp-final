@@ -51,7 +51,7 @@ namespace csharp_final.Models
 
         public static string GenerateFirstName()
         {
-            return GenerateName(_startSyllables, _middleSyllables, _endSyllables, 1, 3);
+            return GenerateName(_startSyllables, _middleSyllables, _endSyllables, 2, 3);
         }
 
         public static string GenerateLastName()
