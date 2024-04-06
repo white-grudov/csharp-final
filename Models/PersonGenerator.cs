@@ -1,14 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
+﻿using System.Collections.ObjectModel;
 using System.Text;
-using System.Windows.Media;
 
 namespace csharp_final.Models
 {
     public class PersonGenerator
     {
-        private static Random random = new();
+        private static readonly Random _random = new();
 
         private readonly static List<string> _startSyllables = 
             ["Br", "Jen", "Mar", "Lor", "Gr", "Phil", "Chris", "Am", "Al", "Rob", "Car", "Mad", "Ev", "Is", "An"];
@@ -26,25 +23,25 @@ namespace csharp_final.Models
         private static string GenerateName(List<string> starts, List<string> middles, List<string> ends, int minSyllables, int maxSyllables)
         {
             StringBuilder name = new();
-            int syllableCount = random.Next(minSyllables, maxSyllables + 1);
+            int syllableCount = _random.Next(minSyllables, maxSyllables + 1);
 
             if (syllableCount == 1)
             {
-                name.Append(starts[random.Next(starts.Count)]);
+                name.Append(starts[_random.Next(starts.Count)]);
             }
             else
             {
-                name.Append(starts[random.Next(starts.Count)]);
+                name.Append(starts[_random.Next(starts.Count)]);
 
                 for (int i = 1; i < syllableCount; i++)
                 {
                     if (i == syllableCount - 1)
                     {
-                        name.Append(ends[random.Next(ends.Count)]);
+                        name.Append(ends[_random.Next(ends.Count)]);
                     }
                     else
                     {
-                        name.Append(middles[random.Next(middles.Count)]);
+                        name.Append(middles[_random.Next(middles.Count)]);
                     }
                 }
             }
@@ -65,14 +62,14 @@ namespace csharp_final.Models
         public static string GenerateEmail(string firstName, string lastName)
         {
             return $"{firstName.ToLower()}.{lastName.ToLower()}@" + 
-                   $"{_emailProviders[random.Next(_emailProviders.Count)]}.{_emailDomains[random.Next(_emailDomains.Count)]}";
+                   $"{_emailProviders[_random.Next(_emailProviders.Count)]}.{_emailDomains[_random.Next(_emailDomains.Count)]}";
         }
 
         public static DateTime GenerateBirthDate()
         {
             DateTime dateStart = new(1950, 1, 1);
             int range = (DateTime.Today - dateStart).Days;
-            return dateStart.AddDays(random.Next(range));
+            return dateStart.AddDays(_random.Next(range));
         }
         public static Person GeneratePerson()
         {

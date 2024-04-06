@@ -1,6 +1,4 @@
 ﻿using csharp_final.Utilities;
-using csharp_project.Exceptions;
-using csharp_project.Utilities;
 
 namespace csharp_final.Models
 {
@@ -37,9 +35,9 @@ namespace csharp_final.Models
         public DateTime BirthDate
         {
             get => _birthDate;
-            set 
-            { 
-                Validators.ValidateDateOfBirth(value); 
+            set
+            {
+                Validators.ValidateDateOfBirth(value);
                 _birthDate = value;
                 CalculateDateProperties();
             }
@@ -57,14 +55,12 @@ namespace csharp_final.Models
             LastName = lastName;
             Email = email;
             BirthDate = birthDate;
-
-            CalculateDateProperties();
         }
 
         private void CalculateDateProperties()
         {
             _age = DateUtilites.CalculateAge(_birthDate);
-            _isAdult = DateTime.Now.Year - _birthDate.Year > 18;
+            _isAdult = _age >= 18;
             _westernZodiac = DateUtilites.GetWesternZodiac(_birthDate);
             _chineseZodiac = DateUtilites.GetChineseZodiac(_birthDate);
             _isBirthday = DateUtilites.IsBirthday(_birthDate);
@@ -72,7 +68,7 @@ namespace csharp_final.Models
 
         public override string ToString()
         {
-            return $"{FirstName} {LastName} {Email} {BirthDate.ToString("dd.MM.yyyy")} {Age} {WesternZodiac} {ChineseZodiac}" +
+            return $"{FirstName} {LastName} {Email} {BirthDate:dd.MM.yyyy} {Age} {WesternZodiac} {ChineseZodiac} " +
                    $"{(IsAdult ? "Adult" : "Child")} {(IsBirthday ? "Birthday" : "")}";
         }
     }

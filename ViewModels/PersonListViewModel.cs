@@ -124,7 +124,7 @@ namespace csharp_final.ViewModels
             var window = new AddNewPersonView();
             if (window.ShowDialog() == true)
             {
-                People.Add(window.NewPerson);
+                People.Add(window.NewPerson!);
                 Task.Run(Filter);
             }
         }
@@ -195,21 +195,34 @@ namespace csharp_final.ViewModels
         {
             await Task.Run(() =>
             {
-                FilteredPeople = new ObservableCollection<Person>(People.Where(p => p.ToString().ToLower().Contains(FilterText.ToLower())));
-                
+                var filtered = People.Where(p => p.ToString().Contains(FilterText, StringComparison.CurrentCultureIgnoreCase));
+
+                Func<Person, object>? sortingCallback = _currentColumn switch
+                {
+                    "FirstName" => p => p.FirstName,
+                    "LastName" => p => p.LastName,
+                    "Email" => p => p.Email,
+                    "BirthDate" => p => p.BirthDate,
+                    "Age" => p => p.Age,
+                    "WesternZodiac" => p => p.WesternZodiac,
+                    "ChineseZodiac" => p => p.ChineseZodiac,
+                    "IsAdult" => p => p.IsAdult,
+                    "IsBirthday" => p => p.IsBirthday,
+                    _ => null
+                };
+
                 if (_currentColumn != null)
                 {
                     if (_sortOrder == SortOrder.Ascending)
                     {
-                        FilteredPeople = new ObservableCollection<Person>(
-                            FilteredPeople.OrderBy(p => typeof(Person).GetProperty(_currentColumn)?.GetValue(p)));
+                        filtered = FilteredPeople.OrderBy(sortingCallback!);
                     }
                     else if (_sortOrder == SortOrder.Descending)
                     {
-                        FilteredPeople = new ObservableCollection<Person>(
-                            FilteredPeople.OrderByDescending(p => typeof(Person).GetProperty(_currentColumn)?.GetValue(p)));
+                        filtered = FilteredPeople.OrderByDescending(sortingCallback!);
                     }
                 }
+                FilteredPeople = new ObservableCollection<Person>(filtered);
             });
         }
 
