@@ -17,11 +17,21 @@ namespace csharp_final
 
         private async void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
-            var result = MessageBox.Show("Do you want to save current list?", "Save Data", MessageBoxButton.YesNo, MessageBoxImage.Question);
-            if (result == MessageBoxResult.Yes)
+            var closeResult = MessageBox.Show("Are you sure you want to exit?", "Exit", 
+                                              MessageBoxButton.YesNo, MessageBoxImage.Warning);
+            if (closeResult == MessageBoxResult.Yes)
             {
-                var viewModel = listView.DataContext as PersonListViewModel;
-                await PersonSerializer.SavePersonListAsync(viewModel!.People);
+                var saveResult = MessageBox.Show("Do you want to save current list?", "Save Data", 
+                                                 MessageBoxButton.YesNo, MessageBoxImage.Question);
+                if (saveResult == MessageBoxResult.Yes)
+                {
+                    var viewModel = listView.DataContext as PersonListViewModel;
+                    await PersonSerializer.SavePersonListAsync(viewModel!.People);
+                }
+            }
+            else
+            {
+                e.Cancel = true;                
             }
         }
     }
