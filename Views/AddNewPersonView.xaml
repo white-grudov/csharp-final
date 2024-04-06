@@ -24,6 +24,7 @@
         <TextBlock Text="Birth Date:" Grid.Row="6" />
         <DatePicker x:Name="dpBirthDate" Grid.Row="7" />
         <StackPanel Grid.Row="8" Orientation="Horizontal" HorizontalAlignment="Right" >
+            <Button Content="Generate" Margin="5" Click="GenerateButton_Click"/>
             <Button Content="Save" Margin="5" Click="SaveButton_Click"/>
             <Button Content="Cancel" Margin="5" Click="CancelButton_Click"/>
         </StackPanel>

@@ -5,11 +5,19 @@ namespace csharp_final.Views
 {
     public partial class AddNewPersonView : Window
     {
-        public Person NewPerson { get; private set; }
+        public Person? NewPerson { get; private set; }
 
         public AddNewPersonView()
         {
             InitializeComponent();
+        }
+
+        private void GenerateButton_Click(object sender, RoutedEventArgs e)
+        {
+            txtFirstName.Text = PersonGenerator.GenerateFirstName();
+            txtLastName.Text = PersonGenerator.GenerateLastName();
+            txtEmail.Text = PersonGenerator.GenerateEmail(txtFirstName.Text, txtLastName.Text);
+            dpBirthDate.SelectedDate = PersonGenerator.GenerateBirthDate();
         }
 
         private void SaveButton_Click(object sender, RoutedEventArgs e)

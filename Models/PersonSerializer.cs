@@ -6,7 +6,6 @@ namespace csharp_final.Models
 {
     internal class PersonSerializer
     {
-        private const string DEFAULT_PATH = "/Data/default.json";
         private const string SAVE_PATH = "/Data/persons.json";
 
         private static readonly JsonSerializerOptions _options = new()
@@ -32,7 +31,7 @@ namespace csharp_final.Models
 
             if (!File.Exists(loadPath))
             {
-                loadPath = applicationPath + DEFAULT_PATH;
+                return PersonGenerator.GeneratePeople(50);
             }
 
             await using FileStream openStream = File.OpenRead(loadPath);

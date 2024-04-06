@@ -15,12 +15,8 @@ namespace csharp_final
 
         private async void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
-            var result = MessageBox.Show("Are you sure you want to exit?", "Exit", MessageBoxButton.YesNo, MessageBoxImage.Question);
-            if (result == MessageBoxResult.No)
-            {
-                e.Cancel = true;
-            }
-            else
+            var result = MessageBox.Show("Do you want to save current list?", "Save Data", MessageBoxButton.YesNo, MessageBoxImage.Question);
+            if (result == MessageBoxResult.Yes)
             {
                 var viewModel = DataContext as ViewModels.PersonListViewModel;
                 await PersonSerializer.SavePersonListAsync(viewModel!.People);
