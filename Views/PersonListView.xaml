@@ -82,19 +82,19 @@
             </ListView.View>
         </ListView>
 
-        <TextBlock Grid.Row="1" HorizontalAlignment="Center" Text="{Binding StringFormat={}{0}, Path=FilterInfo, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" Margin="5" />
-        
-        <StackPanel Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,0">
-            <TextBlock Text="Filter:" Margin="5"/>
-            <TextBox x:Name="FilterTextBox" Text="{Binding FilterText, UpdateSourceTrigger=PropertyChanged}" Width="120" Margin="5" />
-            <Button Content="Reset" Margin="5" Width="50" Command="{Binding Path=ResetCommand}"/>
-        </StackPanel>
-        
-        <StackPanel Grid.Row="3" Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,10">
+        <StackPanel Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,10">
             <Button Content="Add" Margin="5" Width="50" Command="{Binding Path=AddCommand}"/>
             <Button Content="Clear" Margin="5" Width="50" Command="{Binding Path=ClearCommand}"/>
             <Button Content="Save" Margin="5" Width="50" Command="{Binding Path=SaveCommand}"/>
             <Button Content="Load" Margin="5" Width="50" Command="{Binding Path=LoadCommand}"/>
         </StackPanel>
+
+        <StackPanel Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,0">
+            <TextBlock Text="Filter:" Margin="5"/>
+            <TextBox x:Name="FilterTextBox" Text="{Binding FilterText, UpdateSourceTrigger=PropertyChanged}" Width="120" Margin="5" />
+            <Button Content="Reset" Margin="5" Width="50" Command="{Binding Path=ResetCommand}"/>
+        </StackPanel>
+
+        <TextBlock Grid.Row="3" HorizontalAlignment="Center" Text="{Binding StringFormat={}{0}, Path=FilterInfo, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" Margin="0,5" />
     </Grid>
 </UserControl>

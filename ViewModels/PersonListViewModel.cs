@@ -137,6 +137,7 @@ namespace csharp_final.ViewModels
             }
 
             var window = new EditPersonView(SelectedPerson!);
+
             if (window.ShowDialog() == true)
             {
                 OnPropertyChanged(nameof(People));
