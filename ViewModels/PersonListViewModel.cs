@@ -215,11 +215,11 @@ namespace csharp_final.ViewModels
                 {
                     if (_sortOrder == SortOrder.Ascending)
                     {
-                        filtered = FilteredPeople.OrderBy(sortingCallback!);
+                        filtered = filtered.OrderBy(sortingCallback!);
                     }
                     else if (_sortOrder == SortOrder.Descending)
                     {
-                        filtered = FilteredPeople.OrderByDescending(sortingCallback!);
+                        filtered = filtered.OrderByDescending(sortingCallback!);
                     }
                 }
                 FilteredPeople = new ObservableCollection<Person>(filtered);
