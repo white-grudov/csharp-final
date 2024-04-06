@@ -1,0 +1,100 @@
+﻿<UserControl x:Class="csharp_final.Views.PersonListView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:local="clr-namespace:csharp_final.Views"
+             xmlns:vm="clr-namespace:csharp_final.ViewModels"
+             xmlns:converters="clr-namespace:csharp_final.Converters"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800">
+    <UserControl.DataContext>
+        <vm:PersonListViewModel/>
+    </UserControl.DataContext>
+
+    <UserControl.Resources>
+        <converters:BoolToYesNoConverter x:Key="BoolToYesNoConverter"/>
+    </UserControl.Resources>
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <ListView Grid.Row="0" ItemsSource="{Binding FilteredPeople}" SelectedItem="{Binding SelectedPerson, Mode=TwoWay}">
+            <ListView.ContextMenu>
+                <ContextMenu>
+                    <MenuItem Header="Edit" Command="{Binding EditCommand}" />
+                    <MenuItem Header="Delete" Command="{Binding DeleteCommand}" />
+                </ContextMenu>
+            </ListView.ContextMenu>
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn DisplayMemberBinding="{Binding FirstName}">
+                        <GridViewColumn.Header>
+                            <GridViewColumnHeader Tag="FirstName" Width="80" Click="ColumnHeader_Click">First Name</GridViewColumnHeader>
+                        </GridViewColumn.Header>
+                    </GridViewColumn>
+                    <GridViewColumn DisplayMemberBinding="{Binding LastName}">
+                        <GridViewColumn.Header>
+                            <GridViewColumnHeader Tag="LastName" Width="100" Click="ColumnHeader_Click">Last Name</GridViewColumnHeader>
+                        </GridViewColumn.Header>
+                    </GridViewColumn>
+                    <GridViewColumn DisplayMemberBinding="{Binding Email}">
+                        <GridViewColumn.Header>
+                            <GridViewColumnHeader Tag="Email" Width="220" Click="ColumnHeader_Click">Email</GridViewColumnHeader>
+                        </GridViewColumn.Header>
+                    </GridViewColumn>
+                    <GridViewColumn DisplayMemberBinding="{Binding BirthDate, StringFormat=dd.MM.yyyy}">
+                        <GridViewColumn.Header>
+                            <GridViewColumnHeader Tag="BirthDate" Width="80" Click="ColumnHeader_Click">Birth Date</GridViewColumnHeader>
+                        </GridViewColumn.Header>
+                    </GridViewColumn>
+                    <GridViewColumn DisplayMemberBinding="{Binding Age}">
+                        <GridViewColumn.Header>
+                            <GridViewColumnHeader Tag="Age" Width="50" Click="ColumnHeader_Click">Age</GridViewColumnHeader>
+                        </GridViewColumn.Header>
+                    </GridViewColumn>
+                    <GridViewColumn DisplayMemberBinding="{Binding ChineseZodiac}">
+                        <GridViewColumn.Header>
+                            <GridViewColumnHeader Tag="ChineseZodiac" Width="100" Click="ColumnHeader_Click">Chinese Zodiac</GridViewColumnHeader>
+                        </GridViewColumn.Header>
+                    </GridViewColumn>
+                    <GridViewColumn DisplayMemberBinding="{Binding WesternZodiac}">
+                        <GridViewColumn.Header>
+                            <GridViewColumnHeader Tag="WesternZodiac" Width="100" Click="ColumnHeader_Click">Western Zodiac</GridViewColumnHeader>
+                        </GridViewColumn.Header>
+                    </GridViewColumn>
+                    <GridViewColumn DisplayMemberBinding="{Binding IsAdult, Converter={StaticResource BoolToYesNoConverter}}">
+                        <GridViewColumn.Header>
+                            <GridViewColumnHeader Tag="IsAdult" Width="50" Click="ColumnHeader_Click">Adult</GridViewColumnHeader>
+                        </GridViewColumn.Header>
+                    </GridViewColumn>
+                    <GridViewColumn DisplayMemberBinding="{Binding IsBirthday, Converter={StaticResource BoolToYesNoConverter}}">
+                        <GridViewColumn.Header>
+                            <GridViewColumnHeader Tag="IsBirthday" Width="50" Click="ColumnHeader_Click">Birthday</GridViewColumnHeader>
+                        </GridViewColumn.Header>
+                    </GridViewColumn>
+                </GridView>
+            </ListView.View>
+        </ListView>
+
+        <TextBlock Grid.Row="1" HorizontalAlignment="Center" Text="{Binding StringFormat={}{0}, Path=FilterInfo, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" Margin="5" />
+        
+        <StackPanel Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,0">
+            <TextBlock Text="Filter:" Margin="5"/>
+            <TextBox x:Name="FilterTextBox" Text="{Binding FilterText, UpdateSourceTrigger=PropertyChanged}" Width="120" Margin="5" />
+            <Button Content="Reset" Margin="5" Width="50" Command="{Binding Path=ResetCommand}"/>
+        </StackPanel>
+        
+        <StackPanel Grid.Row="3" Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,10">
+            <Button Content="Add" Margin="5" Width="50" Command="{Binding Path=AddCommand}"/>
+            <Button Content="Clear" Margin="5" Width="50" Command="{Binding Path=ClearCommand}"/>
+            <Button Content="Save" Margin="5" Width="50" Command="{Binding Path=SaveCommand}"/>
+            <Button Content="Load" Margin="5" Width="50" Command="{Binding Path=LoadCommand}"/>
+        </StackPanel>
+    </Grid>
+</UserControl>
